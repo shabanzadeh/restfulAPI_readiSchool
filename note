@@ -3,4 +3,4 @@ photo caption
 deleted post
 view post
 comment(login)
- pip freeze > requirments.txt
+ pip freeze > .\requirments.txt
