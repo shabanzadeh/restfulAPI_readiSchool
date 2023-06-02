@@ -1,5 +1,5 @@
 from fastapi import FastAPI
 app = FastAPI()
 @app.get("/")
-def home():
-    return "First Page"
+async def home():
+    return ("hello")
