@@ -16,4 +16,12 @@ def get_news():
            f'apiKey={api_key}')
 
     response = requests.get(url)
-    return response.json()
+    data = response.json()
+
+    articles = []
+    for article in data["articles"]:
+        description = article["description"]
+        articles.append(description)
+
+    return articles
+
