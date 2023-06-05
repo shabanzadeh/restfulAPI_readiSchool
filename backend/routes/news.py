@@ -16,5 +16,4 @@ def get_news():
            f'apiKey={api_key}')
 
     response = requests.get(url)
-    print (response.json)
     return response.json()
