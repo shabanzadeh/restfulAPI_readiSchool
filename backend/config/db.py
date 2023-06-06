@@ -1,2 +1,2 @@
-#from pymongo import MongoClient
-#conn = MongoClient()
+from pymongo import MongoClient
+conn = MongoClient()

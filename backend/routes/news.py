@@ -4,8 +4,15 @@ news = APIRouter()
 import requests
 from fastapi import APIRouter
 import os
+from pymongo import MongoClient
+from config.db import conn
 api_key = os.environ.get("API_key")
 news = APIRouter()
+
+from models.news import News
+from config.db import conn
+from schemas.news import newsEntity
+
 
 @news.get("/news")
 def get_news():
@@ -21,7 +28,22 @@ def get_news():
     articles = []
     for article in data["articles"]:
         description = article["description"]
-        articles.append(description)
+        title = article["title"]
+        urlToImage = article["urlToImage"]
+        url= article["url"]
+        author= article["author"]
+        articles.append({description, title, urlToImage, url, author})
 
     return articles
+
+def storeArtikel(articles):
+    news_dataes = get_news()
+    client = MongoClient('mongodb://localhost:27017/')
+    return newsEntity(conn.local.news.insert_many(articles))
+
+
+
+#@user.post('/')
+#async def create_users(user:User):
+ #   return usersEntity(conn.local.user.insert_one(dict(user)))
 
