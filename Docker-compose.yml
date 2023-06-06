@@ -1,18 +1,20 @@
 version: '3.8'
 
 services:
-  app:
+  api:
     build:
       context: ./backend/
       dockerfile: Dockerfile
     working_dir: /code
     ports:
       - "8080:8080"
+    networks:
+      - backend
+      - frontend
     depends_on:
       - db
-    environment:
-      - MONGO_HOST=db
-      - MONGO_PORT=27017
+    volumes:
+      - '../restfulapi_redischool/backend:/code'
 
   db:
     image: mongo
@@ -20,6 +22,24 @@ services:
       - "27017:27017"
     volumes:
       - data:/data/db
+    environment:
+      - MONGO_HOST=db
+      - MONGO_PORT=27017
+  app:
+    depends_on:
+      - api
+    build: ./frontend
+    working_dir: /code
+    volumes:
+      - '../restfulapi_redischool/frontend/src:/code'
+    ports:
+      - "4000:4000"
+    networks:
+      - frontend
 
 volumes:
   data:
+networks:
+  backend:
+  frontend:
+
