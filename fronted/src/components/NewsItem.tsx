@@ -1,0 +1,1 @@
+import { Rect } from 'react'
