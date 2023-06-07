@@ -5,7 +5,7 @@ import requests
 from fastapi import APIRouter
 import os
 from pymongo import MongoClient
-from config.db import conn
+conn = MongoClient()
 api_key = os.environ.get("API_key")
 news = APIRouter()
 
@@ -30,11 +30,18 @@ def get_news():
         description = article["description"]
         title = article["title"]
         urlToImage = article["urlToImage"]
-        url= article["url"]
-        author= article["author"]
-        articles.append({description, title, urlToImage, url, author})
+        url = article["url"]
+        author = article["author"]
+        articles.append({
+            "description": description,
+            "title": title,
+            "urlToImage": urlToImage,
+            "url": url,
+            "author": author
+        })
 
     return articles
+
 
 def storeArtikel(articles):
     news_dataes = get_news()
