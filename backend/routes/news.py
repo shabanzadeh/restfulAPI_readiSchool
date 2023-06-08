@@ -27,8 +27,7 @@ class News(BaseModel):
 connection = MongoClient(CONNECTION_STRING)
 db = connection.news_artikel
 
-@news.get("/news")
-def get_news():
+def create_news():
     url = ('https://newsapi.org/v2/everything?'
            'q=Apple&'
            'from=2023-06-04&'
@@ -79,4 +78,10 @@ def get_news():
     return result
 
 
+
+@news.get("/news")
+def get_news():
+   articles = create_news()
+   print(articles)
+   return articles
 
