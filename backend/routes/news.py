@@ -3,6 +3,7 @@ from fastapi import APIRouter
 news = APIRouter()
 import requests
 import os
+from bson import json_util
 api_key = os.environ.get("API_key")
 
 import uuid
@@ -20,12 +21,7 @@ class News(BaseModel):
   url:str
   urlToImage:str
   author:str
-  
 
-
-# Connect to DB
-connection = MongoClient(CONNECTION_STRING)
-db = connection.news_artikel
 
 def create_news():
     url = ('https://newsapi.org/v2/everything?'
@@ -53,11 +49,7 @@ def create_news():
             "url": url,
             "author": author
         })
-        count+=1
-        if count>=5:
-           break
-
-        print(articl)
+        
         values =[[
             description,
             title,
@@ -74,14 +66,18 @@ def create_news():
             "autor":value[4],
         }for value in values])
         result.append({description,title,urlToImage,url,author})
+        count+=1
+        if count>=2:
+           break
         
-    return result
+    return(result)
 
 
 
 @news.get("/news")
 def get_news():
-   articles = create_news()
-   print(articles)
-   return articles
+    articles = create_news()
+    result = collection.find({}, {"_id": 0})
+    result_dicts = [doc for doc in result]
+    return result_dicts
 
