@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
 import { Row, Col } from "react-bootstrap";
 import News from "./News";
+
 const grid = () => {
   return (
     <Container fluid>
@@ -15,7 +16,7 @@ const grid = () => {
           sl={12}
         >
           <div>
-            <News/>
+            <News />
           </div>
         </Col>
       </Row>

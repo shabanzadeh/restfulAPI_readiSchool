@@ -2,19 +2,17 @@ import requests
 from fastapi import APIRouter
 news = APIRouter()
 import requests
-from fastapi import APIRouter
 import os
-from pymongo import MongoClient
-conn = MongoClient()
 api_key = os.environ.get("API_key")
-news = APIRouter()
 
 import uuid
-from fastapi import FastAPI, HTTPException, status
-from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from pymongo import MongoClient
 CONNECTION_STRING = 'mongodb://localhost:27017'
+client = MongoClient(CONNECTION_STRING)
+db = client['news_artikel']
+collection = db['news']
+
 class News(BaseModel):
   id: str = Field(default_factory=uuid.uuid4, alias="_id")
   description: str
@@ -62,9 +60,6 @@ def get_news():
             url,
             author,
         ]]
-        client =MongoClient("mongodb://localhost:27017")
-        db = client["news_artikel"]
-        collection = db["news_artikel"]
         result =[]
         collection.insert_many([{
             "description": value[0],

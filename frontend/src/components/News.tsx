@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 
 
 
-const News = ({title, description, url, urlToImage}) => {
+const News = () => {
   const [data, setTopProjects] = useState([]);
 
   const getTopProjects = async () => {
@@ -14,6 +14,7 @@ const News = ({title, description, url, urlToImage}) => {
         `http://localhost:8000/news`
       );
       const jsonData = await response.json();
+      console.log(jsonData);
       setTopProjects(jsonData);
     } catch (err) {
       if (typeof err === "string") {
@@ -26,17 +27,6 @@ const News = ({title, description, url, urlToImage}) => {
   useEffect(() => {
     getTopProjects();
   }, []);
-  return(
-    <div className="news-app">
-      <div className="news-item" src={urlToImage} alt={urlToImage}>
-        <img className="news-img">
-        <h3><a href={url}>{title}</a></h3>
-        <p>{description}</p>
-        </img>
-
-      </div>
-
-    </div>
-  )
+ console.log(data)
 };
 export default News;
