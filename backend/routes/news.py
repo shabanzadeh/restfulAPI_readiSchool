@@ -37,8 +37,10 @@ def get_news():
 
     response = requests.get(url)
     data = response.json()
+    print(data)
 
     articl = []
+    count=0
     for article in data["articles"]:
         description = article["description"]
         title = article["title"]
@@ -52,6 +54,10 @@ def get_news():
             "url": url,
             "author": author
         })
+        count+=1
+        if count>=5:
+           break
+
         print(articl)
         values =[[
             description,
@@ -69,7 +75,8 @@ def get_news():
             "autor":value[4],
         }for value in values])
         result.append({description,title,urlToImage,url,author})
-        return result
+        
+    return result
 
 
 
