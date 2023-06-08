@@ -1,11 +1,11 @@
 import React, { Fragment } from "react";
 import "./App.css";
-import Grid from "./components/grid";
+import News from "./components/News";
 
 function App() {
   return (
     <Fragment>
-      <Grid />
+      <News />
     </Fragment>
   );
 }
