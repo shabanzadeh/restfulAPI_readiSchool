@@ -80,11 +80,3 @@ def get_news():
 
 
 
-
-
-
-
-#@user.post('/')
-#async def create_users(user:User):
- #   return usersEntity(conn.local.user.insert_one(dict(user)))
-
