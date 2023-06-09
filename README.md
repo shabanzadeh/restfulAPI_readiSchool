@@ -2,7 +2,7 @@
 
 ### Creeating News app with fastapi and Mongodb using the newsapi.org 
 
-For this project, we musst first install lokal mongodb, fastapi, requirement  and postman.
+For this project, we musst first install lokal mongodb, fastapi, requirement  and postman. The frontend is developed using React and Bootstrap to display the news articles in an interactive and user-friendly manner.
 
 ## Getting started
 
@@ -15,13 +15,16 @@ For this project, we musst first install lokal mongodb, fastapi, requirement  an
 1. Open a command prompt at the root of the application's folder and cd backend.
 
 2. add a new .env file and then the codes in the env.simple in . env 
-3. Run: `uvicorn app:index --reload`
+3. Install the backend dependencies: pip install -r requirements.txt
+4. Run: `uvicorn app:index --reload`
 
 ## Stack management(frontend)
 
 1. Open a command prompt at the root of the application's folder and cd frontend.
 
 2. add a new .env file and then the codes in the env.simple in . env 
+3. Install the frontend dependencies: cd frontend && npm install
+
 3. Run: `npm run start`
 
 
