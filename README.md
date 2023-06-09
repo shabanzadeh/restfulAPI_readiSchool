@@ -6,7 +6,7 @@ For this project, we musst first install lokal mongodb, fastapi, requirement  an
 
 ## Getting started
 
-![](img/frontend.jpeg)
+![](img/resultFront.jpeg)
 
 
 
