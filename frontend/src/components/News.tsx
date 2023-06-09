@@ -25,23 +25,22 @@ const NewsList = () => {
   }, []);
 
   return (
-    <Row className='container-fluid'>
-      <Col>
-      <div>
-          {articles.map((article) => {
-            return (
-              <div key={article}>
-                <img className="news-img" src={article.urlToImage} alt={article.urlToImage}></img>
-                <h3><a href={article.url}>{article.title}</a></h3>
-                <Form.Text  muted>
-                {article.description}
-                </Form.Text>
-              </div>
-            );
-          })}
+    <Row className="container-fluid" xl={6} md={4} sl={12}>
+    {articles.map((article) => (
+      <Col key={article} xl={4} md={4} sl={12}>
+        <div>
+          <div className="text-center">
+            <img src={article.urlToImage} alt="Article"  style={{ width: "400px", height: "auto" }}/>
+          </div>
+          <h3 className="text-center">
+            <a href={article.url}>{article.title}</a>
+          </h3>
+          <p className="text-center text-dark">{article.description}</p>
         </div>
       </Col>
-    </Row>
+    ))}
+  </Row>
+    
   );
 };
 
