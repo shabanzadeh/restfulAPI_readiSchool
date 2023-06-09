@@ -22,7 +22,7 @@ class News(BaseModel):
   url:str
   urlToImage:str
   author:str
-  created_at: datetime = Field(default_factory=datetime.utcnow)
+  created_at:datetime = Field(default_factory=datetime.utcnow)
 
 
 def create_news():
@@ -43,12 +43,14 @@ def create_news():
         urlToImage = article["urlToImage"]
         url = article["url"]
         author = article["author"]
+        created_at = datetime.utcnow()
         articl.append({
             "description": description,
             "title": title,
             "urlToImage": urlToImage,
             "url": url,
-            "author": author
+            "author": author,
+            "created_at": created_at
         })
         values =[[
             description,
@@ -56,6 +58,7 @@ def create_news():
             urlToImage,
             url,
             author,
+            created_at,
         ]]
         result =[]
         collection.insert_many([{
@@ -64,12 +67,13 @@ def create_news():
             "urlToImage": value[2],
             "url":value[3],
             "autor":value[4],
+            "created_at":value[5]
         }for value in values])
-        result.append({description,title,urlToImage,url,author})
+        result.append({description,title,urlToImage,url,author, created_at})
         count+=1
         if count>=2:
            break
-        
+
     return(result)
 
 
@@ -77,7 +81,7 @@ def create_news():
 @news.get("/news")
 def get_news():
     articles = create_news()
-    result = collection.find({}, {"_id": 0})
+    result = collection.find({}, {"_id": 0}).sort("created_at", -1).limit(2)
     result_dicts = [doc for doc in result]
     return result_dicts
 
