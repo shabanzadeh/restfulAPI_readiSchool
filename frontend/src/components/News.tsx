@@ -1,21 +1,16 @@
-import { Fragment, useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import { useEffect, useState } from "react";
+import { Card, Col, Row } from "react-bootstrap";
 
+const NewsList = () => {
+  const [articles, setArticles] = useState([]);
 
-
-const News = () => {
-  const [data, setTopProjects] = useState([]);
-
-  const getTopProjects = async () => {
+  const newsProjects = async () => {
     try {
       const response = await fetch(
         `http://localhost:8000/news`
       );
       const jsonData = await response.json();
-      console.log(jsonData);
-      setTopProjects(jsonData);
+      setArticles(jsonData); 
     } catch (err) {
       if (typeof err === "string") {
         console.log(err);
@@ -24,9 +19,31 @@ const News = () => {
       }
     }
   };
+
   useEffect(() => {
-    getTopProjects();
+    newsProjects();
   }, []);
- console.log(data)
+
+  return (
+    <Row className='fluid-container'>
+      <Col>
+      
+      <div>
+          {articles.map((article) => {
+            return (
+              <div key={article}>
+                <img className="news-img" src={article.urlToImage} alt={article.urlToImage}></img>
+                <h3><a href={article.url}>{article.title}</a></h3>
+                <p>{article.description}</p>
+              </div>
+            );
+          })}
+        </div>
+    
+      </Col>
+      
+    </Row>
+  );
 };
-export default News;
+
+export default NewsList;
