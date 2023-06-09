@@ -25,7 +25,7 @@ const NewsList = () => {
   }, []);
 
   return (
-    <Row className="container-fluid" xl={6} md={4} sl={12}>
+    <Row className="container-fluid mt-5" xl={6} md={4} sl={12}>
     {articles.map((article) => (
       <Col key={article} xl={4} md={4} sl={12}>
         <div>
