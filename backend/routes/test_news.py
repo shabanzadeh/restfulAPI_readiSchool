@@ -1,10 +1,15 @@
+import unittest
 from fastapi.testclient import TestClient
-from fastapi import APIRouter
 from routes.news import news
-news = APIRouter()
-client = TestClient(news)
-def test_news_get():
-    response = client.get("/news")
-    assert response.status_code ==200
-    assert result = news
-    assert response.json()=={}
+
+class NewsEndpointTestCase(unittest.TestCase):
+    def setUp(self):
+        self.client = TestClient(news.app)
+    def test_get_news(self):
+        response = self.client.get("/news")
+        self.assertEqual(response.status_code, 200)
+
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -4,6 +4,7 @@ news = APIRouter()
 import requests
 import os
 from bson import json_util
+from datetime import datetime
 api_key = os.environ.get("API_key")
 
 import uuid
@@ -21,6 +22,7 @@ class News(BaseModel):
   url:str
   urlToImage:str
   author:str
+  created_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 def create_news():
@@ -32,7 +34,6 @@ def create_news():
 
     response = requests.get(url)
     data = response.json()
-    print(data)
 
     articl = []
     count=0
@@ -49,7 +50,6 @@ def create_news():
             "url": url,
             "author": author
         })
-        
         values =[[
             description,
             title,
