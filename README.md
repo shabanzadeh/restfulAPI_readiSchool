@@ -6,6 +6,10 @@ For this project, we musst first install lokal mongodb, fastapi, requirement  an
 
 ## Getting started
 
+![](img/frontend.jpeg)
+
+
+
 ## Stack management(backend)
 
 1. Open a command prompt at the root of the application's folder and cd backend.
